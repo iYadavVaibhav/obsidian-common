@@ -1,6 +1,8 @@
 {
   "showViewHeader": true,
   "showRibbon": true,
+  "cssTheme": "GitHub Theme",
+  "baseFontSize": 14,
   "nativeMenus": true,
   "translucency": false,
   "enabledCssSnippets": [

@@ -1,20 +1,39 @@
+<%*
+let name = await tp.system.prompt("Enter person's name");
+if (!name) name = "Unknown";
+
+name = name.trim().replace(/\s+/g, ' ');
+const titleCaseName = name
+  .toLowerCase()
+  .split(' ')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
+
+const slug = titleCaseName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+if (slug) {
+    await tp.file.move("/people/" + slug);
+}
+-%>
 ---
-name: {{title}}
-aliases: [{{title}}] 
-role: 
-company: 
-email: 
-phone: 
-type: person
-status: active
+aliases: [<%- titleCaseName %>]
 area: social
+company: 
+created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+email: 
+name: <%- titleCaseName %>
+phone: 
+role: 
+slug: <%- slug %>
+status: active
+title: <%- titleCaseName %>
+type: person
+updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
 
-%% non amazonian template %%
+# <%- titleCaseName %>
 
-# {{title}}
-
-_{{title}}_
+up:: [People Hub](people-hub.md)
 
 ## Notes
 
@@ -22,17 +41,15 @@ _{{title}}_
 
 ---
 
-_anything below is automated_
-
-## Projects
+### Projects
 
 ```dataview
 LIST
 FROM "projects"
-WHERE contains(people, "{{title}}")
+WHERE contains(file.outlinks, [[]])
 ```
 
-## Meetings
+### Meetings
 
 ```dataview
 TABLE file.cday as Created, summary AS "Summary"
@@ -40,17 +57,17 @@ FROM "meeting-notes" where contains(file.outlinks, this.file.link)
 SORT file.cday DESC
 ```
 
-## Tasks
+### Tasks
 
 ```tasks
 not done
-description includes {{title}}@
+description includes <%- titleCaseName %>
 ```
 
-## Mentions
+### Mentions
 
 ```dataview
 TABLE file.cday as Created, summary AS "Summary"
-FROM !"meeting-notes" where contains(file.outlinks, this.file.link)
+FROM !"meeting-notes" and !"people" where contains(file.outlinks, this.file.link)
 SORT file.cday DESC
 ```

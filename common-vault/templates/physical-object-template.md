@@ -1,6 +1,6 @@
 <%*
-let name = await tp.system.prompt("Enter meeting title");
-if (!name) name = "Untitled";
+let name = await tp.system.prompt("Enter object name");
+if (!name) name = "Unnamed";
 
 name = name.trim().replace(/\s+/g, ' ');
 
@@ -16,31 +16,27 @@ if (slug.length > 32) {
 }
 
 if (slug) {
-    await tp.file.move("/meeting-notes/" + tp.date.now("YYYY/MM-MMM/YYYY-MM-DD-ddd-") + slug);
+    await tp.file.move("/physical-objects/" + tp.date.now("YYYY-MM-DD-ddd-") + slug);
 }
 -%>
 ---
 aliases: [<%- titleCaseName %>]
-area: 
+area: personal
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+price: 
+purchased: <% tp.date.now("YYYY-MM-DD") %>
 slug: <%- slug %>
 status: review
-summary: " "
 title: <%- titleCaseName %>
-type: meeting_note
+type: physical_object
 updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+url:
 ---
+
+up:: [Physical Objects Hub](physical-objects-hub.md)
 
 # <%- titleCaseName %>
 
-up:: [Meeting Hub](meetings-hub.md)
-Date: [[<% tp.date.now("YYYY-MM-DD-ddd") %>]]
+### Notes
 
-**Attendees**: 
-- 
-
-## Agenda/Questions
-- 
-
-## Notes
-- 
+ -

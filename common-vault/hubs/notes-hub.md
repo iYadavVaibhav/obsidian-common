@@ -15,4 +15,20 @@ up:: [Master Dashboard](master-dashboard.md)
 
 _entry to all my notes_
 
-- [Note Taking](note-taking.md) Notes, PKM, Zettelkasten
+## 👨🏻‍💻 Ongoing
+
+- [Learning Development](doc-learning-development.md)
+- [Data Engineering](moc-data-engineering.md)
+- [Interpersonal Skills](interpersonal-skills.md)
+- [Business Strategy](business-strategy.md)
+
+
+## 😇 Self Management
+
+```dataview
+LIST WITHOUT ID
+link(file.link, title)
+FROM "notes/self-management"
+SORT updated DESC
+LIMIT 15
+```

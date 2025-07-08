@@ -22,14 +22,6 @@
       "key": "P"
     }
   ],
-  "editor:swap-line-up": [
-    {
-      "modifiers": [
-        "Alt"
-      ],
-      "key": "ArrowUp"
-    }
-  ],
   "editor:swap-line-down": [
     {
       "modifiers": [
@@ -38,13 +30,12 @@
       "key": "ArrowDown"
     }
   ],
-  "templater-obsidian:templates/work-log-snippet.md": [
+  "editor:swap-line-up": [
     {
       "modifiers": [
-        "Alt",
-        "Mod"
+        "Alt"
       ],
-      "key": "W"
+      "key": "ArrowUp"
     }
   ],
   "daily-notes": [

@@ -1,15 +1,15 @@
 ---
-title: Hub - <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project
-type: project_hub
-context: build
-status: inprogress
-area: office
-project: <% tp.file.folder(true).split('/').pop() %>
 aliases: [<% tp.file.folder(true).split('/').pop() %>]
+area:
+context: build
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
-updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 description: ''
 priority: medium
+project: <% tp.file.folder(true).split('/').pop() %>
+status: idea
+title: Hub - <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project
+type: project_hub
+updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
 
 # <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project
@@ -78,6 +78,19 @@ hide backlink
 limit 50
 ```
 
+## Active Tasks (Linked Task Notes)
+```dataview
+TABLE WITHOUT ID
+    link(file.link, title) AS Task,
+    priority,
+    status,
+    due_date AS "Due",
+    effort AS "Effort (h)"
+FROM #type/task_note AND !"templates"
+WHERE project_link = link(this.file.link) AND (status = "todo" OR status = "inprogress")
+SORT priority ASC, due_date ASC
+```
+
 ## Linked Notes
 
 ```dataview
@@ -95,3 +108,4 @@ FROM #project/<% tp.file.folder(true).split('/').pop() %> AND !#type/meeting
 SORT file.ctime DESC
 LIMIT 3
 ```
+

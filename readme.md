@@ -23,6 +23,10 @@ master-dashboard.md
 .obsidian/plugins/obsidian-meta-bind-plugin/data.json
 .obsidian/plugins/obsidian-tasks-plugin/data.json
 .obsidian/plugins/templater-obsidian/data.json
+
+# remove
+phonetool template
+notes-hub
 ```
 
 ## Sync Scripts
@@ -83,4 +87,12 @@ Run once on both machines:
 ```bash
 ./git-sync.sh apply obs-changes-20241201-1430.patch
 ./copy-vault.sh common work
+```
+
+## Fixing issues
+
+Apply git if there are errors:
+
+```sh
+git apply --whitespace=nowarn --allow-binary-replacement --reject --verbose new.patch 2>&1 | grep -v -E "Falling back to direct application|cannot apply binary patch to|\.DS_Store"
 ```

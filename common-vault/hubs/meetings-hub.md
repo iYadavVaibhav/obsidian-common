@@ -58,7 +58,6 @@ link(file.path, title) as Title,
 file.cday as Created,
 summary as Summary
 from "meeting-notes"
-WHERE file.name != "0-hub-meeting"
 SORT file.cday DESC
 ```
 

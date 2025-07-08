@@ -37,7 +37,7 @@ const projectSlug = tp.file.path(true).startsWith('projects') ? tp.file.path(tru
 -%>
 ---
 aliases: [<%- titleCaseName %>]
-area: office
+area: 
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 <%* if (projectSlug) { -%>
 project: <%- projectSlug %>

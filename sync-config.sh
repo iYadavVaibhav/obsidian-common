@@ -2,9 +2,9 @@
 # Configuration file for sync scripts
 
 # Vault paths
-STUDY_VAULT="/Users/iyv/code/repo/study-vault"
+STUDY_VAULT="/Users/vab/code/repo/personal_notes"
 WORK_VAULT="/Users/iyv/code/repo/my-notes"
-COMMON_VAULT="/Users/iyv/code/repo/obs-common/common-vault"
+COMMON_VAULT="/Users/vab/code/repo/obs-common/common-vault"
 
 # Directories to sync (using rsync)
 SYNC_DIRS=(

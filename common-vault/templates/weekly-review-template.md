@@ -1,25 +1,40 @@
+<%*
+
+const slug = moment().endOf("isoWeek").format("YYYY-MM-DD-ddd-") + tp.date.now('[w]ww') + "-review";
+const targetPath = "/weekly-notes/" + tp.date.now("YYYY/MM-MMM/") + slug;
+
+const currentFile = tp.file.find_tfile(tp.file.path(true));
+
+if (await tp.file.exists(targetPath + ".md")) {
+    await app.workspace.openLinkText(targetPath, "", true);
+    new Notice("File Already Exists, opening it");
+    if (currentFile) {
+        await tp.app.vault.trash(currentFile, true);
+    }
+    return;
+
+}
+
+else {
+    await tp.file.move(targetPath);
+}
+-%>
 ---
-title: "Weekly Review - <% tp.date.now('YYYY [W]ww') %>"
-area: office
-type: weekly_review
+area: personal
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
-updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 review_from: <% moment().startOf("isoWeek").format("YYYY-MM-DD") %>
 review_to:  <% moment().endOf("isoWeek").format("YYYY-MM-DD") %>
+status: review
+title: "Weekly Review - <% tp.date.now('YYYY [W]ww') %>"
+type: weekly_review
+updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
+
+up:: [Weekly Review Hub](weekly-review-hub.md)
 
 # Weekly Review - <% tp.date.now('YYYY [W]ww') %>
 
 _<% moment().startOf("isoWeek").format("ddd D") %> - <% moment().endOf("isoWeek").format("ddd D") %>_
-
-Filename: `<% moment().endOf("isoWeek").format("YYYY-MM-DD") %>-<% moment().endOf("isoWeek").format("ddd") %>-<% tp.date.now('[w]ww') %>-review`
-
-
-- Repetitive things to do in weekly review
-   - Process `00 - Inbox`
-   - Review notes tagged `#status/review`
-   - Reflect last week and Plan next week
-   - Archive, delete, merge; as required.
 
 ## Reflect: Review Last Week
 
@@ -31,12 +46,7 @@ Filename: `<% moment().endOf("isoWeek").format("YYYY-MM-DD") %>-<% moment().endO
 
 ## Plan for Coming Week
 
-- Identify 1-3 "Must-Do" Projects/Major Tasks for THIS Week
-- [?] how to assign task to slot, calendar?
-   - **Monday:**
-   - **Tuesday:**
-   - ...
-
+- Identify 1-3 "Must-Do" Projects/Major Tasks for coming Week
 
 ---
 
@@ -66,20 +76,24 @@ SORT file.folder ASC, file.mtime DESC
 
 ## Tasks Due Past Week
 
+_not used_
+
 ```dataview
 TASK
 FROM !"templates" AND !"archive"
 WHERE !completed
- AND due >= this.review_from
- AND due < (this.review_from + dur(7 days))
+   AND due >= this.review_from
+   AND due < (this.review_from + dur(7 days))
 ```
 
 ## Tasks Due Next Week
 
+_not used_
+
 ```dataview
 TASK
 FROM !"templates" AND !"archive"
 WHERE !completed
- AND due >= (this.review_from + dur(7 days))
- AND due < (this.review_from + dur(14 days))
+   AND due >= (this.review_from + dur(7 days))
+   AND due < (this.review_from + dur(14 days))
 ```

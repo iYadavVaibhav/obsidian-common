@@ -12,15 +12,19 @@ up:: [Master Dashboard](master-dashboard.md)
 
 # Projects Hub
 
-## Projects
+## 🚀 All Active & Planned Projects
 
 ```dataview
 TABLE WITHOUT ID
-	link(file.path, title) AS "Project",
-	status
-FROM "projects"
+    link(file.link, title) AS Project,
+    status AS Status,
+    area AS Area,
+    context AS Context,
+    goal AS Goal
+FROM "projects" AND !"templates"
 WHERE type = "project_hub"
-SORT due_date ASC
+    AND (status = "inprogress" OR status = "todo" OR status = "onhold")
+SORT priority ASC, deadline ASC
 ```
 
 ## Tasks by Project
