@@ -1,0 +1,9 @@
+{
+  "showViewHeader": true,
+  "showRibbon": true,
+  "nativeMenus": true,
+  "translucency": false,
+  "enabledCssSnippets": [
+    "my"
+  ]
+}

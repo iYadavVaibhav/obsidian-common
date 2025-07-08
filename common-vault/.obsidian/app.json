@@ -1,0 +1,23 @@
+{
+  "promptDelete": false,
+  "readableLineLength": true,
+  "strictLineBreaks": false,
+  "propertiesInDocument": "visible",
+  "showLineNumber": false,
+  "showIndentGuide": true,
+  "rightToLeft": false,
+  "tabSize": 4,
+  "showUnsupportedFiles": false,
+  "showInlineTitle": false,
+  "livePreview": true,
+  "defaultViewMode": "source",
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": true,
+  "pdfExportSettings": {
+    "pageSize": "Legal",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 75
+  },
+  "useTab": true
+}
