@@ -29,7 +29,8 @@ type: weekly_review
 updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
 
-up:: [Weekly Review Hub](weekly-review-hub.md)
+up:: [Weekly Review Hub](/hubs/weekly-review-hub.md)
+
 
 # Weekly Review - <% tp.date.now('YYYY [W]ww') %>
 
