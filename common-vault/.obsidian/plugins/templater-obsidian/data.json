@@ -29,6 +29,10 @@
     {
       "folder": "meeting-notes",
       "template": "templates/meeting-template.md"
+    },
+    {
+      "folder": "weekly-notes",
+      "template": "templates/weekly-review-template.md"
     }
   ],
   "enable_file_templates": false,

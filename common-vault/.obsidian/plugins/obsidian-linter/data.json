@@ -155,7 +155,7 @@
       "enabled": false
     },
     "remove-empty-list-markers": {
-      "enabled": true
+      "enabled": false
     },
     "remove-hyphenated-line-breaks": {
       "enabled": false
