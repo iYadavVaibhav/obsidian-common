@@ -1,1 +1,5 @@
 dev
+*.patch
+common-vault/templates/phone-tool-template.md
+common-vault/hubs/notes-hub.md
+.env

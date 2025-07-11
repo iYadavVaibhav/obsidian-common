@@ -1,6 +1,5 @@
 ---
 aliases: [Physical Objects Hub]
-area: personal
 created: 2025-07-07 16:02
 status: active
 title: Physical Objects Hub

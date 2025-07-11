@@ -20,7 +20,6 @@ else {
 }
 -%>
 ---
-area: personal
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 review_from: <% moment().startOf("isoWeek").format("YYYY-MM-DD") %>
 review_to:  <% moment().endOf("isoWeek").format("YYYY-MM-DD") %>

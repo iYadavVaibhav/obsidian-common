@@ -1,6 +1,5 @@
 ---
 aliases: [Meetings Hub]
-area: office
 created: 2025-06-30 20:15
 status: active
 title: Meetings Hub

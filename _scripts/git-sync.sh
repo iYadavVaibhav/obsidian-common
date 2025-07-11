@@ -43,7 +43,7 @@ case "$COMMAND" in
         PATCH_FILE="$2"
 
         # Apply patch
-        git apply "$PATCH_FILE"
+        git apply --whitespace=nowarn --allow-binary-replacement --reject --verbose "$PATCH_FILE" 2>&1 | grep -v -E "Falling back to direct application|cannot apply binary patch to|\.DS_Store"
         git add .
         git commit -m "Applied patch $(basename $PATCH_FILE)"
 

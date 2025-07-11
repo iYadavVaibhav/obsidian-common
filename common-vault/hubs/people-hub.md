@@ -1,6 +1,5 @@
 ---
 aliases: [People Hub]
-area: personal
 created: 2025-06-30 20:15
 status: active
 title: People Hub

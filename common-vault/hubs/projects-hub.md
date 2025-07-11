@@ -1,7 +1,6 @@
 ---
 aliases:
   - Projects Hub
-area: office
 created: 2025-06-02 17:07
 title: Projects Hub
 type: hub
