@@ -6,10 +6,10 @@ if [ -f "$(dirname "$0")/../.env" ]; then
     source "$(dirname "$0")/../.env"
 fi
 
-# Vault paths (with defaults if not set in .env)
-STUDY_VAULT="${STUDY_VAULT:-/Users/iyv/code/repo/study-vault}"
-WORK_VAULT="${WORK_VAULT:-/Users/iyv/code/repo/my-notes/work-vault}"
-COMMON_VAULT="${COMMON_VAULT:-/Users/iyv/code/repo/obs-common/vault}"
+# Vault paths (must be set in .env)
+STUDY_VAULT="$STUDY_VAULT"
+WORK_VAULT="$WORK_VAULT"
+COMMON_VAULT="$COMMON_VAULT"
 
 # Convert newline-separated strings to arrays
 IFS=$'\n' read -rd '' -a SYNC_DIRS <<< "$SYNC_DIRS"
