@@ -32,7 +32,7 @@ LIST WITHOUT ID
 link(file.link, title)
 FROM ""
 WHERE type = "hub"
-SORT updated DESC
+SORT file.name ASC
 LIMIT 15
 ```
 

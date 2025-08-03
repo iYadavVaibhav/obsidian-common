@@ -51,7 +51,7 @@ _below is automated_
 ```dataview
 TABLE WITHOUT ID
 link(file.path, title) as Title,
-file.cday as Created,
+purchased as Purchased,
 price as Price
 from "physical-objects"
 SORT file.cday DESC

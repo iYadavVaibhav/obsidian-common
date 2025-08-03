@@ -41,7 +41,12 @@
     "editor:insert-link",
     "editor:toggle-numbered-list",
     "editor:redo",
-    "editor:configure-toolbar"
+    "editor:configure-toolbar",
+    "editor:swap-line-up",
+    "editor:swap-line-down"
   ],
-  "mobilePullAction": "switcher:open"
+  "mobilePullAction": "switcher:open",
+  "focusNewTab": false,
+  "newFileLocation": "root",
+  "newLinkFormat": "absolute"
 }
