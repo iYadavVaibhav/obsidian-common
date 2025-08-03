@@ -36,17 +36,6 @@ A system in [Obsidian](obsidian.md) to do people management like CRM.
 
 ---
 
-## Inline People
-
-- Saurav, Bihar
-    - Work: Romodo
-    - Son: Darshil
-
-- [ ] Add recently contacted
-- [ ] add person by type
-
----
-
 ## People Notes
 
 ```dataview
