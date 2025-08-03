@@ -8,11 +8,11 @@ updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 description: ''
 ---
 
+up:: [Hub <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %>](hub-<% tp.file.folder(true).split('/').pop() %>.md)
+
 # Doc - <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project
 
 _central doc for project_
-
-[Hub <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %>](hub-<% tp.file.folder(true).split('/').pop() %>.md) - Back to Hub
 
 ## Tasks
 

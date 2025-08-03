@@ -1,18 +1,19 @@
 ---
-aliases: [<% tp.file.folder(true).split('/').pop() %>]
-area:
+aliases:
+  - <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project Hub
+area: 
 context: build
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
-description: ''
+description: ""
 priority: medium
 project: <% tp.file.folder(true).split('/').pop() %>
-status: idea
+status: inprogress
 title: Hub - <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project
 type: project_hub
 updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
 
-# <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project
+# <% tp.file.folder(true).split('/').pop().replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) %> Project Hub
 
 up:: [Projects Dashboard](projects-hub.md)
 

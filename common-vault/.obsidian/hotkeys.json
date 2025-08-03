@@ -46,5 +46,14 @@
       ],
       "key": "D"
     }
+  ],
+  "editor:toggle-source": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "V"
+    }
   ]
 }
