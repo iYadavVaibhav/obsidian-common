@@ -11,6 +11,7 @@ Obsidian common templates, settings, hubs and dashboards that are common among v
 - `_scripts/sync-config.sh` - Configuration file for files/folders to sync
 
 ### Initial Setup
+
 1. Copy environment configuration:
 ```bash
 cp .env.example .env
@@ -20,22 +21,6 @@ cp .env.example .env
 2. Run setup once on both machines:
 ```bash
 ./_scripts/setup.sh
-```
-
-### Copy Script Usage
-```bash
-./_scripts/copy-vault.sh <source> <destination>
-```
-
-**Available vault types:**
-- `study` - Study vault
-- `work` - Work vault  
-- `common` - Common vault
-
-**Examples:**
-```bash
-./_scripts/copy-vault.sh work common    # Copy from work-vault to common-vault
-./_scripts/copy-vault.sh common study   # Copy from common-vault to study-vault
 ```
 
 ### Sync Workflows

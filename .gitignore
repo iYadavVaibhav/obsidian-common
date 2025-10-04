@@ -3,3 +3,4 @@ dev
 common-vault/templates/phone-tool-template.md
 common-vault/hubs/notes-hub.md
 .env
+common-vault/templates/.DS_Store
