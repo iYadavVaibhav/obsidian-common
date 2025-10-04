@@ -59,11 +59,11 @@ due before <% custom_date.format("YYYY-MM-DD") %>
 ### Notes Created Today
 
 ```dataview
-LIST FROM "" WHERE file.cday = date("<% custom_date.format("YYYY-MM-DD") %>") SORT file.ctime ASC
+LIST WITHOUT ID link(file.link, title) FROM "" WHERE file.cday = date("<% custom_date.format("YYYY-MM-DD") %>") SORT file.ctime ASC
 ```
 
 ### Notes Updated Today
 
 ```dataview
-List FROM "" WHERE file.mday = date("<% custom_date.format("YYYY-MM-DD") %>") SORT file.mtime asc
+LIST WITHOUT ID link(file.link, title) FROM "" WHERE file.mday = date("<% custom_date.format("YYYY-MM-DD") %>") SORT file.mtime asc
 ```

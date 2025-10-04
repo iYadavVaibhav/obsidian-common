@@ -4,7 +4,7 @@ created: 2025-06-30 20:15
 status: active
 title: Meetings Hub
 type: hub
-updated: 2025-07-07 16:02
+updated: 2025-09-26 21:46
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
@@ -14,12 +14,11 @@ up:: [Master Dashboard](master-dashboard.md)
 ```meta-bind-button
 label: New Meeting
 icon: ""
-style: default
+style: primary
 class: ""
 cssStyle: ""
 backgroundImage: ""
 tooltip: ""
-style: primary
 id: ""
 hidden: false
 actions:
@@ -31,19 +30,6 @@ actions:
     openIfAlreadyExists: true
 
 ```
-
-A system in [Obsidian](obsidian.md) to do meeting management.
-
-- Uses the [meeting-template](meeting-template.md) for notes
-	- Automatically moves to correct folder, adds Slug, Title.
-
-- Ways to create new note:
-	- Using button above
-	- Creating new note in `meeting-notes` folder
-	- Use command: `Templater: Create new note from template`, then pick [meeting-template](meeting-template.md).
-
-- Project Linking
-	- Add `project` as key in FrontMatter, then add **link to project-hub** as value.
 
 ---
 
@@ -69,3 +55,16 @@ FROM #type/meeting
 SORT file.ctime DESC
 LIMIT 50
 ```
+
+## Readme - Meetings Management in Obsidian
+
+- Uses the [meeting-template](meeting-template.md) for meeting notes
+	- Automatically moves to correct folder, adds Slug, Title.
+
+- Ways to create new note:
+	- Using button above, OR
+	- Creating new note in `meeting-notes` folder, OR
+	- Use command: `Templater: Create new note from template`, then pick [meeting-template](meeting-template.md).
+
+- Project Linking
+	- Add `project` as _key_ in **FrontMatter**, then add **link to project-hub** as value.

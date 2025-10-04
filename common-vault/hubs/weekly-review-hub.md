@@ -14,12 +14,11 @@ up:: [Master Dashboard](master-dashboard.md)
 ```meta-bind-button
 label: Weekly Review
 icon: ""
-style: default
+style: primary
 class: ""
 cssStyle: ""
 backgroundImage: ""
 tooltip: ""
-style: primary
 id: ""
 hidden: false
 actions:
@@ -47,3 +46,13 @@ from "weekly-notes"
 WHERE file.name != "0-hub-weekly-review"
 SORT file.cday DESC
 ```
+
+## Readme - Weekly Review in Obsidian
+
+- The template [weekly-review-template](weekly-review-template.md) populates weekly review activity note to reflect back.
+
+### How to use
+
+- Create new note from button above
+- Reflect and plan
+- Review notes and tasks

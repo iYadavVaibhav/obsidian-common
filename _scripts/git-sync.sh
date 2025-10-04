@@ -15,7 +15,7 @@ if [ $# -eq 0 ]; then
 fi
 
 COMMAND="$1"
-cd "/Users/iyv/code/repo/obs-common"
+cd "/Users/iyv/code/repo/obsidian-common"
 
 case "$COMMAND" in
     "generate")

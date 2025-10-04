@@ -1,5 +1,5 @@
 <%*
-let prompt = "Enter meeting title";
+let prompt = "Enter workshop title";
 
 let name = await tp.system.prompt(prompt);
 
@@ -17,32 +17,27 @@ if (slug.length > 32) {
     slug = slug.substring(0, 32).replace(/-$/, '');
 }
 
-if (slug) {
-    await tp.file.move("/meeting-notes/" + tp.date.now("YYYY/MM-MMM/YYYY-MM-DD-ddd-") + slug);
-}
--%>
+// Create workshop folder
+const workshopFolder = `workshops/${slug}`;
+await app.vault.createFolder(workshopFolder).catch(() => console.log("Folder already exists"));
+
+// move file
+await tp.file.move(`${workshopFolder}/0-${slug}`);
+
+_%>
+
 ---
 aliases: [<%- titleCaseName %>]
 area: 
 created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
-slug: <%- slug %>
-status: review
-summary: " "
+status: todo
 title: <%- titleCaseName %>
-type: meeting_note
+type: workshop_hub
 updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
 
+up:: [Workshops Hub](workshop-hub.md)
+
 # <%- titleCaseName %>
 
-up:: [Meeting Hub](meetings-hub.md)
-Date: [[<% tp.date.now("YYYY-MM-DD-ddd") %>]]
 
-**Attendees**: 
-- 
-
-## Agenda/Questions
-- 
-
-## Notes
-- 

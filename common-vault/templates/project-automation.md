@@ -9,6 +9,7 @@ const projectSlug = projectName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w
 // Create project folder
 const projectFolder = `projects/${projectSlug}`;
 await app.vault.createFolder(projectFolder).catch(() => console.log("Folder already exists"));
+await app.vault.createFolder(projectFolder+`/docs`).catch(() => console.log("Folder already exists"));
 
 // Create project files with consistent naming convention
 await tp.file.create_new(tp.file.find_tfile("templates/project-hub-template.md"), `hub-${projectSlug}`, false, projectFolder);

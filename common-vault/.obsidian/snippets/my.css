@@ -1,3 +1,31 @@
 .cm-s-obsidian span.cm-inline-code {
     color: #b80000;
 }
+
+.theme-light {
+    --h1-color: #2C2C2C;
+    --h2-color: #D84315;
+    --h3-color: #a120c5;
+    --h4-color: #36a73b;
+    --h5-color: #455A64;
+    --h6-color: #C2185B;
+}
+
+.theme-dark {
+    --h1-color: #eeeeee;
+    --h2-color: #ff9800;
+    --h3-color: #e91e63;
+    --h4-color: #66bb6a;
+    --h5-color: #90a4ae;
+    --h6-color: #f06292;
+
+}
+
+body {
+    --inline-title-color: var(--h1-color);
+}
+
+.HyperMD-header-1,
+h1 {
+    --link-color: var(--h1-color);
+}

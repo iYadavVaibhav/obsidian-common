@@ -39,10 +39,10 @@ _<% moment().startOf("isoWeek").format("ddd D") %> - <% moment().endOf("isoWeek"
 ## Reflect: Review Last Week
 
 - **What went well? Accomplishments?**
- -
+	 - 
+
 - **What didn't go well? Challenges?**
- -
-- **Review completed tasks & projects.**
+	 - 
 
 ## Plan for Coming Week
 

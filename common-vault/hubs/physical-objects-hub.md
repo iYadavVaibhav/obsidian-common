@@ -4,7 +4,7 @@ created: 2025-07-07 16:02
 status: active
 title: Physical Objects Hub
 type: hub
-updated: 2025-07-07 16:02
+updated: 2025-09-26 21:47
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
@@ -14,12 +14,11 @@ up:: [Master Dashboard](master-dashboard.md)
 ```meta-bind-button
 label: New Object
 icon: ""
-style: default
+style: primary
 class: ""
 cssStyle: ""
 backgroundImage: ""
 tooltip: ""
-style: primary
 id: ""
 hidden: false
 actions:
@@ -31,16 +30,6 @@ actions:
     openIfAlreadyExists: true
 
 ```
-
-A system in [Obsidian](obsidian.md) to do physical objects management.
-
-- Uses the [physical-object-template](physical-object-template.md) for notes
-	- Automatically moves to correct folder, adds Slug, Title.
-
-- Ways to create new note:
-	- Using button above
-	- Creating new note in `physical-objects` folder
-	- Use command: `Templater: Create new note from template`, then pick [physical-object-template](physical-object-template.md).
 
 ---
 
@@ -57,3 +46,9 @@ from "physical-objects"
 SORT file.cday DESC
 ```
 
+## Readme - Physical Objects Management in Obsidian
+
+- Ways to create new note:
+	- Using button above
+	- Creating new note in `physical-objects` folder
+	- Use command: `Templater: Create new note from template`, then pick [physical-object-template](physical-object-template.md).

@@ -41,33 +41,59 @@ up:: [People Hub](people-hub.md)
 
 ---
 
-### Projects
+_below is automated_
+
+
+## Recent Meetings
+
+```dataview
+LIST WITHOUT ID
+	link(file.path, title) + " - " + file.ctime
+FROM "meeting-notes"
+WHERE contains(file.outlinks, this.file.link)
+SORT file.ctime DESC
+LIMIT 5
+```
+
+## Inline Meeting Notes
 
 ```dataview
 LIST
-FROM "projects"
-WHERE contains(file.outlinks, [[]])
-```
-
-### Meetings
-
-```dataview
-TABLE file.cday as Created, summary AS "Summary"
-FROM "meeting-notes" where contains(file.outlinks, this.file.link)
+    L.text
+FROM #type/meeting
+FLATTEN file.lists as L
+WHERE contains(L.text, "#type/meeting") AND (contains(L.text, "<%- slug %>") OR contains(L.text, "<%- titleCaseName %>"))
 SORT file.cday DESC
+LIMIT 10
 ```
 
-### Tasks
+## Active Tasks
 
 ```tasks
 not done
-description includes <%- titleCaseName %>
+description includes <%- slug %>
 ```
 
-### Mentions
+## Daily Note Mentions
 
 ```dataview
-TABLE file.cday as Created, summary AS "Summary"
-FROM !"meeting-notes" and !"people" where contains(file.outlinks, this.file.link)
+LIST
+    L.text
+FROM "daily-notes"
+FLATTEN file.lists as L
+WHERE (contains(L.text, "<%- slug %>") OR contains(L.text, "<%- titleCaseName %>")) AND !contains(L.text, "#type/meeting")
+SORT file.cday DESC
+LIMIT 10
+```
+
+## Linked Notes
+
+_linked, not in daily notes_
+
+```dataview
+LIST WITHOUT ID
+link(file.path, title)
+from !"daily-notes" AND !"meeting-notes"
+where contains(file.outlinks, this.file.link)
 SORT file.cday DESC
 ```

@@ -33,6 +33,7 @@ const slug = titleCaseName.toLowerCase()
 // Rename file and get project
 if (slug) await tp.file.rename(slug);
 const projectSlug = tp.file.path(true).startsWith('projects') ? tp.file.path(true).split('/')[1] : null;
+const projectTitle = projectSlug ? projectSlug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ') : null;
 
 -%>
 ---
@@ -49,7 +50,7 @@ updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
 
 <%* if (projectSlug) { -%>
-up:: [Project Hub](hub-<%- projectSlug %>.md)
+up:: [<%- projectTitle %> Project Hub](hub-<%- projectSlug %>.md)
 <%* } -%>
 
 # <%- titleCaseName %>
