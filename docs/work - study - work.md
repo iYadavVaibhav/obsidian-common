@@ -114,6 +114,7 @@ cd $COMMON_VAULT/..
 git add .
 git commit -m "Study to common"
 ```
+> **Imp:** This above step might overwrite the changes that came from work repo. DO manual checks.
 
 Now you have changes from _study_ to _common on study_, as well. Now _common on study_ has all changes.
 
