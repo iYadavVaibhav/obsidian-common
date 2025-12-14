@@ -4,7 +4,7 @@ created: 2025-06-30 20:15
 status: active
 title: Meetings Hub
 type: hub
-updated: 2025-09-26 21:46
+updated: 2025-12-02 12:21
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
@@ -37,29 +37,58 @@ _below is automated_
 
 ## Meetings Notes
 
-```dataview
-TABLE WITHOUT ID
-link(file.path, title) as Title,
-file.cday as Created,
-summary as Summary
-from "meeting-notes"
-SORT file.cday DESC
+```base
+filters:
+  and:
+    - file.inFolder("meeting-notes")
+formulas:
+  Title: link(file.asLink(), title)
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+    sort:
+      - property: file.ctime
+        direction: DESC
 ```
 
 ## Inline Meetings
 
 ```dataview
-LIST WITHOUT ID
-	link(file.path, title)
+LIST 
+	L.text
 FROM #type/meeting
+FLATTEN file.lists as L
+WHERE contains(L.text, "#type/meeting")
 SORT file.ctime DESC
-LIMIT 50
+Limit 100
+```
+
+## Recurring Meetings
+
+```base
+filters:
+  and:
+    - type == "recurring_meeting"
+formulas:
+  Title: link(file.asLink(), title)
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+
 ```
 
 ## Readme - Meetings Management in Obsidian
 
 - Uses the [meeting-template](meeting-template.md) for meeting notes
 	- Automatically moves to correct folder, adds Slug, Title.
+
+- Recurring Meetings
+	- Has dedicated page, with `type::recurring_meeting`
+	- can have log of occurrence on the page, or on daily-notes.
 
 - Ways to create new note:
 	- Using button above, OR

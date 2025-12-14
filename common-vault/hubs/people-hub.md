@@ -4,7 +4,7 @@ created: 2025-06-30 20:15
 status: active
 title: People Hub
 type: hub
-updated: 2025-09-26 21:56
+updated: 2025-12-02 18:03
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
@@ -35,13 +35,27 @@ actions:
 
 ## People Notes
 
-```dataview
-LIST WITHOUT ID
-    link(file.path, title)
-from "people"
-WHERE file.name != "0-hub-people"
-sort file.name asc
+```base
+filters:
+  and:
+    - file.inFolder("people")
+    - file.name != "0-hub-people"
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.name
+    columnSize:
+      formula.Title: 400
+
 ```
+
 
 ## Readme - People Management in Obsidian
 

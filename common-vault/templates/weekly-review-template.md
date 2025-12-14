@@ -62,15 +62,27 @@ SORT file.name DESC
 
 ## Review these Notes
 
-```dataview
-TABLE WITHOUT ID
-   link(file.path, title) as Note,
-   file.folder as Folder
-FROM !"templates"
-WHERE contains(tags, "status/review")
-OR contains(status, "review")
-OR contains(file.tags, "status/review")
-SORT file.folder ASC, file.mtime DESC
+```base
+filters:
+  and:
+    - '!file.inFolder("templates")'
+    - or:
+        - status == "review"
+        - file.tags == ["context/build"]
+formulas:
+  Title: link(file.asLink(), title)
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - file.folder
+    sort:
+      - property: file.folder
+        direction: ASC
+      - property: file.mtime
+        direction: DESC
+
 ```
 
 

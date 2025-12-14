@@ -30,19 +30,36 @@ up:: [Projects Dashboard](projects-hub.md)
 
 _below is automated_
 
-## Recent Notes
+## Recent Updates
 
-```dataview
-LIST WITHOUT ID
-	link(file.path, title)
-FROM "projects/<% tp.file.folder(true).split('/').pop() %>"
-WHERE file.name != "hub-<% tp.file.folder(true).split('/').pop() %>" 
-  AND file.name != "doc-<% tp.file.folder(true).split('/').pop() %>"
-SORT file.mtime DESC
-LIMIT 50
+_last few files updated in this project_
+
+```base
+filters:
+  and:
+    - file.inFolder("projects/<% tp.file.folder(true).split('/').pop() %>")
+    - file.name != "hub-<% tp.file.folder(true).split('/').pop() %>"
+    - file.name != "doc-<% tp.file.folder(true).split('/').pop() %>"
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.mtime
+        direction: DESC
+    columnSize:
+      formula.Title: 400
+
 ```
 
 ## Active Tasks
+
+_project folder only_
 
 ```tasks
 not done
@@ -53,10 +70,13 @@ hide backlink
 limit 50
 ```
 
+---
 
-## Daily Note Mentions
+## Linked or Tagged
 
-_tagged or linked_
+### Daily Note Mentions
+
+_inline tagged or linked, excludes ~~type/meeting~~_
 
 ```dataview
 LIST
@@ -68,37 +88,80 @@ SORT file.cday DESC
 LIMIT 50
 ```
 
-## Linked Notes
+### Other Notes Mentions
 
-_linked, not in daily notes_
+_linked or tagged, excludes ~~daily notes~~_
 
-```dataview
-LIST WITHOUT ID
-link(file.path, title)
-from !"daily-notes"
-where contains(file.outlinks, this.file.link)
-SORT file.cday DESC
+```base
+filters:
+  and:
+    - '!file.inFolder("daily-notes")'
+    - '!file.inFolder("meeting-notes")'
+    - or:
+        - file.hasLink(this.file)
+        - file.tags == ["project/<% tp.file.folder(true).split('/').pop() %>"]
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.ctime
+        direction: DESC
+    columnSize:
+      formula.Title: 400
+
 ```
 
-## Recent Meetings
+---
 
-```dataview
-LIST WITHOUT ID
-	link(file.path, title) + " - " + file.ctime
-FROM "meeting-notes"
-WHERE project = this.file.link
-SORT file.ctime DESC
-LIMIT 5
-```
+## Meetings
 
-## Inline Meeting Notes
+### Inline Meeting Notes
+
+_use `type/meeting` and project link or tag_
 
 ```dataview
 LIST
     L.text
-FROM #type/meeting OR #project/<% tp.file.folder(true).split('/').pop() %>
+FROM #type/meeting
 FLATTEN file.lists as L
-WHERE contains(L.text, "#type/meeting") AND contains(L.text, "#project/<% tp.file.folder(true).split('/').pop() %>")
+WHERE
+	contains(L.text, "#type/meeting") AND (
+		contains(L.text, "#project/<% tp.file.folder(true).split('/').pop() %>") OR
+		contains(L.text, "hub-<% tp.file.folder(true).split('/').pop() %>")
+	)
+
 SORT file.cday DESC
 LIMIT 10
+```
+
+### Dedicated Meeting Notes
+
+_use meeting note with `project` key_
+
+```base
+filters:
+  and:
+    - file.inFolder("meeting-notes")
+    - file.hasLink(this.file)
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.ctime
+        direction: DESC
+    limit: 10
+    columnSize:
+      formula.Title: 400
 ```

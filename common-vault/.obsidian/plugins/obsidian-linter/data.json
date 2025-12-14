@@ -283,7 +283,15 @@
   "linterLocale": "system-default",
   "logLevel": "ERROR",
   "lintCommands": [],
-  "customRegexes": [],
+  "customRegexes": [
+    {
+      "label": "Make bullet keyword bold",
+      "find": "^(\\s*(?:[-*+]|\\d+\\.|[-*+]?\\s*\\[[x ]\\])\\s+)(?!\\*\\*)(?!\\[)([^:`.\\n]{1,199}): (.+)",
+      "replace": "$1**$2:** $3",
+      "flags": "gm",
+      "enabled": true
+    }
+  ],
   "commonStyles": {
     "aliasArrayStyle": "single-line",
     "tagArrayStyle": "single-line",

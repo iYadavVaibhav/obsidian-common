@@ -4,7 +4,7 @@ aliases:
 created: 2025-06-18 07:52
 title: Weekly Review Hub
 type: hub
-updated: 2025-07-11 17:01
+updated: 2025-12-02 14:23
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
@@ -37,14 +37,28 @@ actions:
 
 ## Weekly Review Notes
 
-```dataview
-TABLE WITHOUT ID
-link(file.path, title) as Title,
-review_from as From,
-review_to as To
-from "weekly-notes"
-WHERE file.name != "0-hub-weekly-review"
-SORT file.cday DESC
+```base
+filters:
+  and:
+    - file.inFolder("weekly-notes")
+formulas:
+  Title: link(file.asLink(), title)
+properties:
+  note.review_from:
+    displayName: From
+  note.review_to:
+    displayName: To
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - review_from
+      - review_to
+    sort:
+      - property: file.ctime
+        direction: DESC
+
 ```
 
 ## Readme - Weekly Review in Obsidian

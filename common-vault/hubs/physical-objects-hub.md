@@ -4,7 +4,7 @@ created: 2025-07-07 16:02
 status: active
 title: Physical Objects Hub
 type: hub
-updated: 2025-09-26 21:47
+updated: 2025-12-02 14:27
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
@@ -37,13 +37,23 @@ _below is automated_
 
 ## Physical Objects Notes
 
-```dataview
-TABLE WITHOUT ID
-link(file.path, title) as Title,
-purchased as Purchased,
-price as Price
-from "physical-objects"
-SORT file.cday DESC
+```base
+filters:
+  and:
+    - file.inFolder("physical-objects")
+formulas:
+  Title: link(file.asLink(), title)
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - purchased
+      - price
+    sort:
+      - property: file.ctime
+        direction: DESC
+
 ```
 
 ## Readme - Physical Objects Management in Obsidian

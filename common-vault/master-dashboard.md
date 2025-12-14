@@ -3,7 +3,7 @@ aliases: [Master Dashboard]
 created: 2025-05-13 11:50
 title: Master Dashboard
 type: dashboard
-updated: 2025-07-09 00:34
+updated: 2025-12-08 12:06
 ---
 
 # Master Dashboard
@@ -58,11 +58,9 @@ group by priority
 
 ## ⏳ Upcoming Tasks (Next 7 Days)
 
-_Not used_
-
 ```tasks
 not done
-due after today and due before today - 8
+due after today and due before today + 8
 path does not include templates
 path does not include archive
 group by due
@@ -70,81 +68,55 @@ group by due
 
 ## ✍️ Recent Notes
 
-```dataview
-LIST WITHOUT ID
-    link(file.link, title)
-FROM !"templates" AND !"daily-notes" AND !"weekly-notes" AND !"inbox" AND !"archive" // Exclude certain folders
-SORT updated DESC
-LIMIT 10
-```
+```base
+filters:
+  and:
+    - '!file.inFolder("templates")'
+    - '!file.inFolder("daily-notes")'
+    - '!file.inFolder("weekly-notes")'
+    - '!file.inFolder("inbox")'
+    - '!file.inFolder("z_archive")'
+    - '!file.inFolder("archive")'
+    - '!file.inFolder("hubs")'
+    - file.ext != "log"
+formulas:
+  Title: link(file.asLink(), title)
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - file.folder
+    sort:
+      - property: file.mtime
+        direction: DESC
+    limit: 20
+    columnSize:
+      formula.Title: 400
 
-## 🚀 Active Projects
-
-```dataview
-TABLE WITHOUT ID
-    link(file.link, title) AS Project,
-    status AS Status,
-    priority AS Priority,
-    context AS Context,
-    deadline AS Deadline
-FROM "projects" AND !"templates"
-WHERE type = "project_hub"
-    AND (status = "inprogress" OR status = "todo" OR status = "onhold")
-SORT priority ASC, deadline ASC
-LIMIT 10
-```
-
-## 👥 Recent People Interactions
-
-_not used_
-
-```dataview
-LIST WITHOUT ID
-	link(file.path, title)
-FROM "people"
-SORT file.mtime DESC
-LIMIT 5
-```
-
-## 📝 Recent Meeting Notes
-
-_not used_
-
-**Last 5 Meeting Notes**
-
-```dataview
-LIST WITHOUT ID
-	link(file.path, title)
-FROM ""
-WHERE
-	type = "meeting"
-SORT file.ctime DESC
-LIMIT 10
-```
-
-**Last 5 Meeting Blocks**
-
-```dataview
-LIST 
-	L.text
-FROM #type/meeting
-FLATTEN file.lists as L
-WHERE contains(L.text, "#type/meeting")
-SORT file.ctime DESC
-Limit 5
 ```
 
 ## 👀 Docs to Review
 
-^6d1334
+```base
+filters:
+  and:
+    - '!file.inFolder("templates")'
+    - or:
+        - status == "review"
+        - file.tags == ["context/build"]
+formulas:
+  Title: link(file.asLink(), title)
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - file.folder
+    sort:
+      - property: file.folder
+        direction: ASC
+      - property: file.mtime
+        direction: DESC
 
-```dataview
-TABLE WITHOUT ID
-    link(file.path, title) as Note,
-    file.folder as Folder
-FROM !"templates"
-WHERE contains(tags, "status/review")
-OR contains(status, "review")
-OR contains(file.tags, "status/review")
-SORT file.folder ASC, file.mtime DESC
 ```

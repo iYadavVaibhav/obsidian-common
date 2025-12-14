@@ -46,13 +46,26 @@ _below is automated_
 
 ## Recent Meetings
 
-```dataview
-LIST WITHOUT ID
-	link(file.path, title) + " - " + file.ctime
-FROM "meeting-notes"
-WHERE contains(file.outlinks, this.file.link)
-SORT file.ctime DESC
-LIMIT 5
+```base
+filters:
+  and:
+    - file.inFolder("meeting-notes")
+    - file.hasLink(this.file)
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.ctime
+        direction: DESC
+    columnSize:
+      formula.Title: 400
+
 ```
 
 ## Inline Meeting Notes
@@ -90,10 +103,131 @@ LIMIT 10
 
 _linked, not in daily notes_
 
-```dataview
-LIST WITHOUT ID
-link(file.path, title)
-from !"daily-notes" AND !"meeting-notes"
-where contains(file.outlinks, this.file.link)
-SORT file.cday DESC
+```base
+filters:
+  and:
+    - '!file.inFolder("daily-notes")'
+    - '!file.inFolder("meeting-notes")'
+    - file.hasLink(this.file)
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.ctime
+        direction: DESC
+    columnSize:
+      formula.Title: 400
+
 ```
+
+
+
+===
+
+
+
+
+_anything below is automated_
+
+## Active Tasks
+
+```tasks
+not done
+description includes <%- slug %>
+```
+
+---
+
+## Linked or Tagged
+
+### Daily Note Mentions
+
+_inline tagged or linked, excludes ~~type/meeting~~_
+
+```dataview
+LIST
+    L.text
+FROM "daily-notes"
+FLATTEN file.lists as L
+WHERE (contains(L.text, "<%- slug %>") OR contains(L.text, "<%- titleCaseName %>")) AND !contains(L.text, "#type/meeting")
+SORT file.cday DESC
+LIMIT 50
+```
+
+### Other Notes Mentions
+
+_linked or tagged, excludes ~~daily notes~~_
+
+```base
+filters:
+  and:
+    - '!file.inFolder("daily-notes")'
+    - '!file.inFolder("meeting-notes")'
+    - file.hasLink(this.file)
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.ctime
+        direction: DESC
+    columnSize:
+      formula.Title: 400
+
+```
+
+---
+
+## Meetings
+
+### Inline Meeting Notes
+
+_use `type/meeting` and project link or tag_
+
+```dataview
+LIST
+    L.text
+FROM #type/meeting
+FLATTEN file.lists as L
+WHERE contains(L.text, "#type/meeting") AND (contains(L.text, "<%- slug %>") OR contains(L.text, "<%- titleCaseName %>"))
+SORT file.cday DESC
+LIMIT 10
+```
+
+### Dedicated Meeting Notes
+
+_use meeting note with `project` key_
+
+```base
+filters:
+  and:
+    - file.inFolder("meeting-notes")
+    - file.hasLink(this.file)
+formulas:
+  Title: link(file.asLink(), title)
+  Created: file.ctime.format("h:mm a - ddd, D MMM yyyy")
+views:
+  - type: table
+    name: Table
+    order:
+      - formula.Title
+      - formula.Created
+    sort:
+      - property: file.ctime
+        direction: DESC
+    limit: 10
+    columnSize:
+      formula.Title: 400
+```
+

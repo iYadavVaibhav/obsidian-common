@@ -38,13 +38,13 @@ filters:
     - file.inFolder("projects")
     - type == "project_hub"
 formulas:
-  Link: link(file.asLink(), title)
+  Title: link(file.asLink(), title)
   Started: file.ctime.format("D MMM, YY")
 views:
   - type: table
     name: Projects
     order:
-      - formula.Link
+      - formula.Title
       - status
       - context
       - formula.Started
