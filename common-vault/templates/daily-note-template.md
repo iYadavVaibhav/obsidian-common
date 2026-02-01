@@ -39,7 +39,7 @@ updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 
 ```dataview
 TASK
-FROM "daily-notes/<% moment(custom_date).subtract(1, 'day').format("YYYY-MM-DD-ddd") %>"
+FROM "daily-notes/<% moment(custom_date).subtract(1, 'day').format("YYYY/MM-MMM/YYYY-MM-DD-ddd") %>"
 WHERE !completed
 ```
 

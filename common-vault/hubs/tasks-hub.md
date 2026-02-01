@@ -4,12 +4,14 @@ aliases:
 created: 2025-06-02 11:43
 title: Tasks Hub
 type: hub
-updated: 2025-12-03 11:45
+updated: 2026-01-28 09:30
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
 
 # Tasks Hub
+
+_manage all tasks in the vault_
 
 ## 🚨 Action Required
 
@@ -17,12 +19,10 @@ up:: [Master Dashboard](master-dashboard.md)
 
 _Tasks that need immediate attention_
 
-```tasks
-not done
-due before today
-path does not include templates
-path does not include archive
-sort by priority desc, due asc
+```dataview
+TASK
+WHERE !completed AND due AND due < date(today) AND !contains(file.path, "templates") AND !contains(file.path, "archive")
+SORT file.cday DESC, due ASC
 ```
 
 ### High Priority Tasks
@@ -37,47 +37,25 @@ path does not include archive
 sort by due asc
 ```
 
-### Due This Week
+---
 
-_Plan your week effectively_
+## 📅 Due or Start This Week
 
-```tasks
-not done
-due in this week
-path does not include templates
-path does not include archive
-sort by priority desc, due asc
+```dataview
+TASK
+WHERE !completed AND ((due AND due >= date(today) AND due <= date(today) + dur(7 days)) OR (start AND start >= date(today) AND start <= date(today) + dur(7 days)))
+SORT due ASC, start ASC
 ```
 
-## 📅 Upcoming Tasks
+## 📅 Due or Start Beyond This Week
 
-### Starting Soon
-
-_Tasks with start dates in the next 7 days_
-
-```tasks
-not done
-has start date
-starts after yesterday
-starts before in 7 days
-path does not include templates
-path does not include archive
-sort by start asc
+```dataview
+TASK
+WHERE !completed AND ((due AND due > date(today) + dur(7 days)) OR (start AND start > date(today) + dur(7 days)))
+SORT due ASC, start ASC
 ```
 
-### Due Next Week
-
-_Plan ahead_
-
-```tasks
-not done
-due in next week
-path does not include templates
-path does not include archive
-sort by priority desc, due asc
-```
-
-## 🎯 By Priority
+## Prioritized
 
 ### Medium Priority
 
@@ -99,43 +77,34 @@ path does not include archive
 sort by due asc
 ```
 
-## 📋 Task Management
+---
 
-### Tasks Without Dates
+## 📋 All Recent Tasks
 
-_Need scheduling_
+_All tasks in the vault, ordered by most recently created first_
 
-```tasks
-not done
-no due date
-no start date
-path does not include templates
-path does not include archive
-group by priority
+```dataview
+TASK
+WHERE !completed
+SORT file.cday DESC
 ```
 
-### All Tasks by File
+## 📋 All by File Link
 
-_Overview for weekly review_
-
-```tasks
-not done
-path does not include templates
-path does not include archive
-group by filename
-sort by priority desc, due asc
+```dataview
+TASK
+WHERE !completed
+GROUP BY file.link
+SORT file.cday DESC
 ```
 
 ## ✅ Recently Completed
 
-_Last 7 days_
-
-```tasks
-done
-done after 7 days ago
-path does not include templates
-path does not include archive
-sort by done desc
+```dataview
+TASK
+WHERE completed AND completion >= date(today) - dur(20 days)
+SORT completion DESC
+LIMIT 20
 ```
 
 ---

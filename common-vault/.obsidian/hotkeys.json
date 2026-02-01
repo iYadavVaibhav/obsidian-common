@@ -82,5 +82,14 @@
       ],
       "key": "R"
     }
+  ],
+  "editor:toggle-fold-properties": [
+    {
+      "modifiers": [
+        "Alt",
+        "Shift"
+      ],
+      "key": "P"
+    }
   ]
 }

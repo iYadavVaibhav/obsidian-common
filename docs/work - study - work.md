@@ -48,6 +48,8 @@ _Common Vault with Remote Sync access_
 source .env
 
 cd $COMMON_VAULT/..
+git checkout master
+git pull --rebase
 git branch -D master_patched
 git checkout -b master_patched
 touch diff.patch
@@ -56,12 +58,11 @@ touch diff.patch
 Copy and paste contents to `diff.patch`.
 
 ```sh
-git apply --3way --reject --whitespace=nowarn --allow-binary-replacement diff.patch
+git apply --reject --whitespace=nowarn --allow-binary-replacement diff.patch
 ```
 
 Here, the flags are:
 
-- `--3way` - Use 3-way merge algorithm (reduces .rej files)
 - `--reject` - Create .rej files for failed hunks (fallback when 3-way fails)
 - `--whitespace=nowarn` - Ignore whitespace issues
 - `--allow-binary-replacement` - Handle binary files
@@ -176,6 +177,8 @@ unzip master.zip
 rm master.zip
 cp -r ./obsidian-common-master/. .
 rm -rf obsidian-common-master
+git add .
+git commit -m "Remote to Common"
 git checkout -b dev
 
 # Common to Work

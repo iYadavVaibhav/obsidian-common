@@ -49,10 +49,12 @@ views:
     order:
       - formula.Title
       - formula.Created
-    sort:
-      - property: file.name
+      - role
+      - manager_login
+    sort: []
     columnSize:
-      formula.Title: 400
+      formula.Title: 289
+      note.role: 152
 
 ```
 
