@@ -1,3 +1,11 @@
+.dataview-container div.dataview-error-box {
+    min-height: unset;
+}
+
+p.dataview-error-message {
+    color: var(--color-base-40);
+}
+
 .cm-s-obsidian span.cm-inline-code {
     color: #b80000;
 }

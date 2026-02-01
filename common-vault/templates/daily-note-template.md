@@ -21,6 +21,8 @@ type: daily_note
 updated: <% tp.date.now("YYYY-MM-DD HH:mm") %>
 ---
 
+up:: [Daily Notes Hub](daily-notes-hub.md)
+
 # <% custom_date.format("ddd, DD MMM YYYY") %>
 
 << [<% moment(custom_date).subtract(1, 'day').format("YYYY-MM-DD-ddd") %>](daily-notes/<% moment(custom_date).subtract(1, 'day').format("YYYY/MM-MMM/YYYY-MM-DD-ddd") %>.md) | [<% moment(custom_date).add(1, 'day').format("YYYY-MM-DD-ddd") %>](daily-notes/<% moment(custom_date).add(1, 'day').format("YYYY/MM-MMM/YYYY-MM-DD-ddd") %>.md) >>
@@ -59,11 +61,17 @@ due before <% custom_date.format("YYYY-MM-DD") %>
 ### Notes Created Today
 
 ```dataview
-LIST WITHOUT ID link(file.link, title) FROM "" WHERE file.cday = date("<% custom_date.format("YYYY-MM-DD") %>") SORT file.ctime ASC
+LIST WITHOUT ID link(file.link, title) 
+FROM ""
+WHERE file.cday = date("<% custom_date.format("YYYY-MM-DD") %>") 
+SORT file.ctime ASC
 ```
 
 ### Notes Updated Today
 
 ```dataview
-LIST WITHOUT ID link(file.link, title) FROM "" WHERE file.mday = date("<% custom_date.format("YYYY-MM-DD") %>") SORT file.mtime asc
+LIST WITHOUT ID link(file.link, title)
+FROM !"templates"
+WHERE file.mday = date("<% custom_date.format("YYYY-MM-DD") %>")
+SORT file.mtime asc
 ```

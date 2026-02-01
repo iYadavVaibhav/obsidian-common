@@ -31,7 +31,7 @@ actions:
 
 ```
 
-- See, [Weekly Review Process](/notes/weekly-review-process.md)
+- See, [Weekly Review Process](notes/other/weekly-review-process.md)
 
 ---
 

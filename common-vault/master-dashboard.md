@@ -3,7 +3,7 @@ aliases: [Master Dashboard]
 created: 2025-05-13 11:50
 title: Master Dashboard
 type: dashboard
-updated: 2025-12-08 12:06
+updated: 2025-12-25 13:52
 ---
 
 # Master Dashboard
@@ -110,6 +110,9 @@ formulas:
 views:
   - type: table
     name: Table
+    groupBy:
+      property: file.folder
+      direction: DESC
     order:
       - formula.Title
       - file.folder

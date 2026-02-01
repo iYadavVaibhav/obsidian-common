@@ -110,12 +110,15 @@ cd $COMMON_VAULT/..
 
 # copy from study
 ./_scripts/copy-vault.sh study common
+```
 
+> **Imp:** This above step might overwrite the changes that came from work repo. DO manual checks.
+
+```sh
 # verify changes and commit to common
 git add .
 git commit -m "Study to common"
 ```
-> **Imp:** This above step might overwrite the changes that came from work repo. DO manual checks.
 
 Now you have changes from _study_ to _common on study_, as well. Now _common on study_ has all changes.
 

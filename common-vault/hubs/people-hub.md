@@ -51,7 +51,8 @@ views:
       - formula.Created
       - role
       - manager_login
-    sort: []
+    sort:
+      - property: file.name
     columnSize:
       formula.Title: 289
       note.role: 152
