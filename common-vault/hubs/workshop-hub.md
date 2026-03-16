@@ -4,7 +4,7 @@ aliases:
 created: 2025-09-17 10:17
 title: Workshops Hub
 type: hub
-updated: 2025-12-07 14:02
+updated: 2026-03-15 22:38
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
