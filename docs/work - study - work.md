@@ -194,7 +194,7 @@ git checkout -b dev
 cd $WORK_VAULT
 # git status
 git add .
-git commit -m "Common to Work. Sync Complete"
+git commit -m "Common to Work. Update Complete"
 ```
 
 Now work is synced with study and common.

@@ -29,6 +29,13 @@ up:: [Daily Notes Hub](daily-notes-hub.md)
 
 - <% tp.file.cursor() %>
 
+- Day View
+	- 3 hr core 9-12
+	- 1 hr social 12-1 - done
+	- 2 hr collab 1-3
+	- 2 hr side 3-5
+	- 2 hr tech 5-7
+
 - What have you accomplished?
     - 
 

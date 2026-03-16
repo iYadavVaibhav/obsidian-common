@@ -4,7 +4,7 @@ aliases:
 created: 2025-06-02 11:43
 title: Tasks Hub
 type: hub
-updated: 2026-01-28 09:30
+updated: 2026-02-23 14:31
 ---
 
 up:: [Master Dashboard](master-dashboard.md)
@@ -17,29 +17,13 @@ _manage all tasks in the vault_
 
 ### Overdue Tasks
 
-_Tasks that need immediate attention_
-
 ```dataview
 TASK
 WHERE !completed AND due AND due < date(today) AND !contains(file.path, "templates") AND !contains(file.path, "archive")
 SORT file.cday DESC, due ASC
 ```
 
-### High Priority Tasks
-
-_Focus on these first_
-
-```tasks
-not done
-priority is high
-path does not include templates
-path does not include archive
-sort by due asc
-```
-
----
-
-## 📅 Due or Start This Week
+### Due this week
 
 ```dataview
 TASK
@@ -47,7 +31,7 @@ WHERE !completed AND ((due AND due >= date(today) AND due <= date(today) + dur(7
 SORT due ASC, start ASC
 ```
 
-## 📅 Due or Start Beyond This Week
+### Due in Future
 
 ```dataview
 TASK
@@ -57,37 +41,50 @@ SORT due ASC, start ASC
 
 ## Prioritized
 
-### Medium Priority
+### Urgent
 
-```tasks
-not done
-priority is medium
-path does not include templates
-path does not include archive
-sort by due asc
+```dataview
+TASK
+WHERE !completed AND !due AND (contains(text, "🔺") OR contains(text, "⏫")) AND !contains(file.path, "templates") AND !contains(file.path, "archive")
+SORT due ASC
 ```
 
-### Low Priority
+### Priority
 
-```tasks
-not done
-priority is low
-path does not include templates
-path does not include archive
-sort by due asc
+```dataview
+TASK
+WHERE !completed AND !due AND (contains(text, "🔼") OR contains(text, "🔽") OR contains(text, "⏬️")) AND !contains(file.path, "templates") AND !contains(file.path, "archive")
+SORT due ASC
 ```
 
 ---
 
-## 📋 All Recent Tasks
+## Handovers
+
+```dataview
+TASK
+FROM "/"
+WHERE !completed 
+AND (
+	contains(tags, "status/handover")
+	OR contains(tags, "status/handover")
+)
+SORT file.mtime DESC
+```
+
+## 📋 Other Tasks
 
 _All tasks in the vault, ordered by most recently created first_
 
 ```dataview
 TASK
-WHERE !completed
-SORT file.cday DESC
+WHERE !completed AND !due AND !contains(text, "🔺") AND !contains(text, "⏫") AND !contains(text, "🔼") AND !contains(text, "🔽") AND !contains(text, "⏬️") AND !contains(text, "#status/handover")
+SORT file.mday DESC
 ```
+
+---
+
+_never used_
 
 ## 📋 All by File Link
 
@@ -105,6 +102,5 @@ TASK
 WHERE completed AND completion >= date(today) - dur(20 days)
 SORT completion DESC
 LIMIT 20
-```
 
----
+```
